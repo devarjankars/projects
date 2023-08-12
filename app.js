@@ -1,9 +1,10 @@
-const http = require('http');
 
-const routes = require('./routes');
+const express= require('express')
+const app=express();
 
-console.log(routes.someText);
-
-const server = http.createServer(routes.handler);
-
-server.listen(3030)
+app.listen(3030);
+const user=[{id:1, name:"sanjay"}, {id:2, name:"riya"},{id:3, name:"prachi"}];
+app.get('/',(req,res)=>{
+    
+    res.send('<h1>sanjay</h1>');
+})
