@@ -1,17 +1,17 @@
-
+const path=require('path');
 const express= require('express')
-const app=express();
+const adminRoute=require('./route.js');
+const normalRoute=require('./shop.js');
 const bodyparser=require('body-parser')
+const app=express();
+
 app.listen(3030);
+
 app.use(bodyparser.urlencoded({extended:false}))
 
-
-app.get ('/login',(req,res,next)=>{
-    console.log('ON the Login Page');
-    res.send('<form action ="/" method="POST"><input type="text"><button type="submit">Log-In</button></form>')
-})
-app.post('/',(req,res,next)=>{
-    console.log('home page')
-    console.log(req.body)
-
-})
+ app.use('/admin',adminRoute);
+ app.use('/',normalRoute);
+ 
+ app.use((req,res,next)=>{
+    res.sendFile(path.join(__dirname,'error.html'));
+ })
